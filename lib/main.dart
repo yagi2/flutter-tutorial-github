@@ -112,6 +112,14 @@ class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
                       ),
                     )
                   : Container(),
+              repository.description != null
+                  ? Padding(
+                      padding: const EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 12.0),
+                      child: Text(repository.description!,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w200, color: Colors.grey)),
+                    )
+                  : Container(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
