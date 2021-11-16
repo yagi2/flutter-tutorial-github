@@ -1,4 +1,8 @@
+import 'dart:convert' show json;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_github/model/github_repository.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -15,53 +19,136 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const GitHubRepositoryContainer(title: 'GitHub Repository Search'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class GitHubRepositoryContainer extends StatefulWidget {
+  const GitHubRepositoryContainer({Key? key, required this.title})
+      : super(key: key);
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<GitHubRepositoryContainer> createState() =>
+      _GitHubRepositoryContainerState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
+  List<GitHubRepository> _repositories = [];
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  Future<List<GitHubRepository>> _searchRepositories(String searchQuery) async {
+    final response = await http.get(Uri.parse(
+        'https://api.github.com/search/repositories?q=' +
+            searchQuery +
+            "&sort=stars&order=desc"));
+
+    if (response.statusCode == 200) {
+      List<GitHubRepository> list = [];
+      Map<String, dynamic> decoded = json.decode(response.body);
+      for (var item in decoded['items']) {
+        list.add(GitHubRepository.fromJson(item));
+      }
+      return list;
+    } else {
+      throw Exception('fail to search repositories.');
+    }
+  }
+
+  Widget _buildInput() {
+    return Container(
+      margin: const EdgeInsets.all(16.0),
+      child: TextField(
+        decoration: const InputDecoration(
+            prefixIcon: Icon(Icons.search),
+            hintText: "Please enter a search keyword.",
+            labelText: "Search"),
+        onSubmitted: (input) {
+          _searchRepositories(input).then((repositories) {
+            setState(() {
+              _repositories = repositories;
+            });
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildRepositoryList() {
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemBuilder: (BuildContext context, int index) {
+        final repository = _repositories[index];
+        return _buildCard(repository);
+      },
+      itemCount: _repositories.length,
+    );
+  }
+
+  Widget _buildCard(GitHubRepository repository) {
+    return Card(
+        margin: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+        child: InkWell(
+          onTap: () {},
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  repository.fullName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16.0),
+                ),
+              ),
+              repository.language != null
+                  ? Padding(
+                      padding: const EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 12.0),
+                      child: Text(
+                        repository.language!,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 12.0),
+                      ),
+                    )
+                  : Container(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  const Icon(Icons.star),
+                  SizedBox(
+                    width: 50.0,
+                    child: Text(repository.stargazersCount.toString()),
+                  ),
+                  const Icon(Icons.remove_red_eye),
+                  SizedBox(
+                    width: 50.0,
+                    child: Text(repository.watchersCount.toString()),
+                  ),
+                  const Text("Fork: "),
+                  SizedBox(
+                    width: 50.0,
+                    child: Text(repository.forksCount.toString()),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16.0,
+              )
+            ],
+          ),
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+        appBar: AppBar(title: Text(widget.title)),
+        body: Column(children: <Widget>[
+          _buildInput(),
+          Expanded(
+            child: _buildRepositoryList(),
+          )
+        ]));
   }
 }

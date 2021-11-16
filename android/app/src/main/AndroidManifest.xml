@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.yagi2.flutter_tutorial_github">
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="flutter_tutorial_github"
         android:icon="@mipmap/ic_launcher">
