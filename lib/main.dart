@@ -36,12 +36,21 @@ class GitHubRepositoryContainer extends StatefulWidget {
 
 class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
   List<GitHubRepository> _repositories = [];
+  bool _isLoading = false;
 
   Future<List<GitHubRepository>> _searchRepositories(String searchQuery) async {
+    setState(() {
+      _isLoading = true;
+    });
+
     final response = await http.get(Uri.parse(
         'https://api.github.com/search/repositories?q=' +
             searchQuery +
             "&sort=stars&order=desc"));
+
+    setState(() {
+      _isLoading = false;
+    });
 
     if (response.statusCode == 200) {
       List<GitHubRepository> list = [];
@@ -75,14 +84,21 @@ class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
   }
 
   Widget _buildRepositoryList() {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemBuilder: (BuildContext context, int index) {
-        final repository = _repositories[index];
-        return _buildCard(repository);
-      },
-      itemCount: _repositories.length,
+    return Stack(
+      children: <Widget>[
+        ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            final repository = _repositories[index];
+            return _buildCard(repository);
+          },
+          itemCount: _repositories.length,
+        ),
+        _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Container()
+      ],
     );
   }
 
