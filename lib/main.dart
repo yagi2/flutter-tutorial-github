@@ -83,7 +83,7 @@ class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
     );
   }
 
-  Widget _buildRepositoryList() {
+  Widget _buildRepositoryListWithProgress() {
     return Stack(
       children: <Widget>[
         ListView.builder(
@@ -140,18 +140,20 @@ class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   const Icon(Icons.star),
+                  const SizedBox(width: 4.0),
                   SizedBox(
-                    width: 50.0,
+                    width: 64.0,
                     child: Text(repository.stargazersCount.toString()),
                   ),
                   const Icon(Icons.remove_red_eye),
+                  const SizedBox(width: 4.0),
                   SizedBox(
-                    width: 50.0,
+                    width: 64.0,
                     child: Text(repository.watchersCount.toString()),
                   ),
                   const Text("Fork: "),
                   SizedBox(
-                    width: 50.0,
+                    width: 64.0,
                     child: Text(repository.forksCount.toString()),
                   ),
                 ],
@@ -171,7 +173,7 @@ class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
         body: Column(children: <Widget>[
           _buildInput(),
           Expanded(
-            child: _buildRepositoryList(),
+            child: _buildRepositoryListWithProgress(),
           )
         ]));
   }
