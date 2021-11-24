@@ -1,5 +1,6 @@
 class GitHubRepository {
   final String fullName;
+  final String name;
   final String? description;
   final String? language;
   final String htmlUrl;
@@ -9,6 +10,7 @@ class GitHubRepository {
 
   GitHubRepository.fromJson(Map<String, dynamic> json)
       : fullName = json['full_name'],
+        name = json['name'],
         description = json['description'],
         language = json['language'],
         htmlUrl = json['html_url'],

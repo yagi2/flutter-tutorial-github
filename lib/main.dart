@@ -15,31 +15,44 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const GitHubRepositoryContainer(title: 'GitHub Repository Search'),
+      home: const GitHubRepositoryListPage(title: 'GitHub Repository Search'),
     );
   }
 }
 
-class GitHubRepositoryContainer extends StatefulWidget {
-  const GitHubRepositoryContainer({Key? key, required this.title})
+class GitHubRepositoryDetailPage extends StatelessWidget {
+  const GitHubRepositoryDetailPage({Key? key, required this.repository})
+      : super(key: key);
+  final GitHubRepository repository;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: Text(repository.name)),
+        body: const Center(child: CircularProgressIndicator()));
+  }
+}
+
+class GitHubRepositoryListPage extends StatefulWidget {
+  const GitHubRepositoryListPage({Key? key, required this.title})
       : super(key: key);
   final String title;
 
   @override
-  State<GitHubRepositoryContainer> createState() =>
-      _GitHubRepositoryContainerState();
+  State<GitHubRepositoryListPage> createState() =>
+      _GitHubRepositoryListPageState();
 }
 
-class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
+class _GitHubRepositoryListPageState extends State<GitHubRepositoryListPage> {
   List<GitHubRepository> _repositories = [];
   bool _isLoading = false;
 
   Future<List<GitHubRepository>> _searchRepositories(String searchQuery) async {
     setState(() {
+      _repositories = [];
       _isLoading = true;
     });
 
@@ -106,7 +119,11 @@ class _GitHubRepositoryContainerState extends State<GitHubRepositoryContainer> {
     return Card(
         margin: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return GitHubRepositoryDetailPage(repository: repository);
+            }));
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
