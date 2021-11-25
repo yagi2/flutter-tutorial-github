@@ -1,6 +1,7 @@
 import 'dart:convert' show json;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_github/github_repository_detail_page.dart';
 import 'package:flutter_tutorial_github/model/github_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,19 +21,6 @@ class MyApp extends StatelessWidget {
       ),
       home: const GitHubRepositoryListPage(title: 'GitHub Repository Search'),
     );
-  }
-}
-
-class GitHubRepositoryDetailPage extends StatelessWidget {
-  const GitHubRepositoryDetailPage({Key? key, required this.repository})
-      : super(key: key);
-  final GitHubRepository repository;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text(repository.name)),
-        body: const Center(child: CircularProgressIndicator()));
   }
 }
 
