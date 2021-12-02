@@ -1,6 +1,7 @@
 import 'dart:convert' show json;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_github/model/github_repository_loading_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -56,7 +57,7 @@ class _GitHubRepositorySearchInputWidget extends StatelessWidget {
             labelText: "Search"),
         onSubmitted: (input) {
           Provider.of<_StatefulProviderState>(context, listen: false)
-              .searchRepositories(input);
+              .searchRepositories(context, input);
         },
       ),
     );
@@ -68,25 +69,27 @@ class _GitHubRepositoryListWithProgressWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            return _GitHubRepositoryCardWidget(
-              repository: Provider.of<List<GitHubRepository>>(
-                context,
-                listen: false,
-              )[index],
-            );
-          },
-          itemCount: Provider.of<List<GitHubRepository>>(context).length,
-        ),
-        Provider.of<bool>(context)
-            ? const Center(child: CircularProgressIndicator())
-            : Container()
-      ],
+    return Consumer<GitHubRepositoryLoadingModel>(
+      builder: (BuildContext context, GitHubRepositoryLoadingModel value,
+          Widget? child) {
+        return Stack(
+          children: <Widget>[
+            ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                return _GitHubRepositoryCardWidget(
+                  repository: value.repositories[index],
+                );
+              },
+              itemCount: value.repositories.length,
+            ),
+            value.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : Container()
+          ],
+        );
+      },
     );
   }
 }
@@ -180,35 +183,31 @@ class _StatefulProvider extends StatefulWidget {
 }
 
 class _StatefulProviderState extends State<_StatefulProvider> {
-  List<GitHubRepository> _repositories = [];
-  bool _isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         Provider.value(value: this),
-        Provider.value(value: _repositories),
-        Provider.value(value: _isLoading),
+        ChangeNotifierProvider(
+            create: (context) => GitHubRepositoryLoadingModel()),
       ],
       child: widget.child,
     );
   }
 
-  void searchRepositories(String searchQuery) async {
-    setState(() {
-      _repositories = [];
-      _isLoading = true;
-    });
+  void searchRepositories(BuildContext context, String searchQuery) async {
+    var _gitHubRepositoryLoadingModel =
+        Provider.of<GitHubRepositoryLoadingModel>(context, listen: false);
+
+    _gitHubRepositoryLoadingModel.clear();
+    _gitHubRepositoryLoadingModel.startLoading();
 
     final response = await http.get(Uri.parse(
         'https://api.github.com/search/repositories?q=' +
             searchQuery +
             "&sort=stars&order=desc"));
 
-    setState(() {
-      _isLoading = false;
-    });
+    _gitHubRepositoryLoadingModel.stopLoading();
 
     if (response.statusCode == 200) {
       List<GitHubRepository> list = [];
@@ -216,9 +215,7 @@ class _StatefulProviderState extends State<_StatefulProvider> {
       for (var item in decoded['items']) {
         list.add(GitHubRepository.fromJson(item));
       }
-      setState(() {
-        _repositories = list;
-      });
+      _gitHubRepositoryLoadingModel.addAll(list);
     } else {
       throw Exception('fail to search repositories.');
     }
