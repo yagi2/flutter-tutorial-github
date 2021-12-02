@@ -185,15 +185,13 @@ class _StatefulProviderState extends State<_StatefulProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider.value(
-      value: _repositories,
-      child: Provider.value(
-        value: _isLoading,
-        child: Provider.value(
-          value: this,
-          child: widget.child,
-        ),
-      ),
+    return MultiProvider(
+      providers: [
+        Provider.value(value: this),
+        Provider.value(value: _repositories),
+        Provider.value(value: _isLoading),
+      ],
+      child: widget.child,
     );
   }
 
