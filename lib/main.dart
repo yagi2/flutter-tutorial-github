@@ -2,6 +2,7 @@ import 'dart:convert' show json;
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import 'github_repository_detail_page.dart';
 import 'model/github_repository.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: _StatefulInherited(
+      home: _StatefulProvider(
         child: _HomePage(title: "GitHub Repository search"),
       ),
     );
@@ -54,7 +55,7 @@ class _GitHubRepositorySearchInputWidget extends StatelessWidget {
             hintText: "Please enter a search keyword.",
             labelText: "Search"),
         onSubmitted: (input) {
-          _StatefulInherited.of(context, listen: true)
+          Provider.of<_StatefulProviderState>(context, listen: false)
               .searchRepositories(input);
         },
       ),
@@ -74,13 +75,15 @@ class _GitHubRepositoryListWithProgressWidget extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return _GitHubRepositoryCardWidget(
-                repository: _StatefulInherited.of(context, listen: false)
-                    ._repositories[index]);
+              repository: Provider.of<List<GitHubRepository>>(
+                context,
+                listen: false,
+              )[index],
+            );
           },
-          itemCount:
-              _StatefulInherited.of(context, listen: true)._repositories.length,
+          itemCount: Provider.of<List<GitHubRepository>>(context).length,
         ),
-        _StatefulInherited.of(context, listen: true)._isLoading
+        Provider.of<bool>(context)
             ? const Center(child: CircularProgressIndicator())
             : Container()
       ],
@@ -164,8 +167,8 @@ class _GitHubRepositoryCardWidget extends StatelessWidget {
   }
 }
 
-class _StatefulInherited extends StatefulWidget {
-  const _StatefulInherited({
+class _StatefulProvider extends StatefulWidget {
+  const _StatefulProvider({
     Key? key,
     required this.child,
   }) : super(key: key);
@@ -173,31 +176,24 @@ class _StatefulInherited extends StatefulWidget {
   final Widget child;
 
   @override
-  State<StatefulWidget> createState() => _StatefulInheritedState();
-
-  static _StatefulInheritedState of(
-    BuildContext context, {
-    required bool listen,
-  }) {
-    return listen
-        ? (context.dependOnInheritedWidgetOfExactType<_Inherited>()
-                as _Inherited)
-            .state
-        : (context.getElementForInheritedWidgetOfExactType<_Inherited>()?.widget
-                as _Inherited)
-            .state;
-  }
+  State<StatefulWidget> createState() => _StatefulProviderState();
 }
 
-class _StatefulInheritedState extends State<_StatefulInherited> {
+class _StatefulProviderState extends State<_StatefulProvider> {
   List<GitHubRepository> _repositories = [];
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return _Inherited(
-      state: this,
-      child: widget.child,
+    return Provider.value(
+      value: _repositories,
+      child: Provider.value(
+        value: _isLoading,
+        child: Provider.value(
+          value: this,
+          child: widget.child,
+        ),
+      ),
     );
   }
 
@@ -229,17 +225,4 @@ class _StatefulInheritedState extends State<_StatefulInherited> {
       throw Exception('fail to search repositories.');
     }
   }
-}
-
-class _Inherited extends InheritedWidget {
-  const _Inherited({
-    Key? key,
-    required this.state,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  final _StatefulInheritedState state;
-
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) => true;
 }
