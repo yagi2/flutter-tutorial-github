@@ -1,15 +1,16 @@
-import 'dart:convert' show json;
-
 import 'package:flutter/material.dart';
-import 'package:flutter_tutorial_github/model/github_repository_loading_model.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'github_repository_detail_page.dart';
 import 'model/github_repository.dart';
+import 'model/github_repository_loading_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,9 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: _StatefulProvider(
-        child: _HomePage(title: "GitHub Repository search"),
-      ),
+      home: _HomePage(title: "GitHub Repository search"),
     );
   }
 }
@@ -43,53 +42,53 @@ class _HomePage extends StatelessWidget {
   }
 }
 
-class _GitHubRepositorySearchInputWidget extends StatelessWidget {
+class _GitHubRepositorySearchInputWidget extends ConsumerWidget {
   const _GitHubRepositorySearchInputWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final gitHubRepositoryLoadingModelNotifier =
+        ref.watch(gitHubRepositoryLoadingModelNotifierProvider.notifier);
+
     return Container(
       margin: const EdgeInsets.all(16.0),
       child: TextField(
         decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.search),
-            hintText: "Please enter a search keyword.",
-            labelText: "Search"),
+          prefixIcon: Icon(Icons.search),
+          hintText: "Please enter a search keyword.",
+          labelText: "Search",
+        ),
         onSubmitted: (input) {
-          Provider.of<_StatefulProviderState>(context, listen: false)
-              .searchRepositories(context, input);
+          gitHubRepositoryLoadingModelNotifier.searchRepositories(input);
         },
       ),
     );
   }
 }
 
-class _GitHubRepositoryListWithProgressWidget extends StatelessWidget {
+class _GitHubRepositoryListWithProgressWidget extends ConsumerWidget {
   const _GitHubRepositoryListWithProgressWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<GitHubRepositoryLoadingModel>(
-      builder: (BuildContext context, GitHubRepositoryLoadingModel value,
-          Widget? child) {
-        return Stack(
-          children: <Widget>[
-            ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return _GitHubRepositoryCardWidget(
-                  repository: value.repositories[index],
-                );
-              },
-              itemCount: value.repositories.length,
-            ),
-            value.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Container()
-          ],
-        );
-      },
+  Widget build(BuildContext context, WidgetRef ref) {
+    final gitHubRepositoryLoadingModel =
+        ref.watch(gitHubRepositoryLoadingModelNotifierProvider);
+
+    return Stack(
+      children: [
+        ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            return _GitHubRepositoryCardWidget(
+                repository: gitHubRepositoryLoadingModel.repositories[index]);
+          },
+          itemCount: gitHubRepositoryLoadingModel.repositories.length,
+        ),
+        gitHubRepositoryLoadingModel.isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Container()
+      ],
     );
   }
 }
@@ -167,58 +166,5 @@ class _GitHubRepositoryCardWidget extends StatelessWidget {
             ],
           ),
         ));
-  }
-}
-
-class _StatefulProvider extends StatefulWidget {
-  const _StatefulProvider({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
-
-  final Widget child;
-
-  @override
-  State<StatefulWidget> createState() => _StatefulProviderState();
-}
-
-class _StatefulProviderState extends State<_StatefulProvider> {
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider.value(value: this),
-        ChangeNotifierProvider(
-            create: (context) => GitHubRepositoryLoadingModel()),
-      ],
-      child: widget.child,
-    );
-  }
-
-  void searchRepositories(BuildContext context, String searchQuery) async {
-    var _gitHubRepositoryLoadingModel =
-        Provider.of<GitHubRepositoryLoadingModel>(context, listen: false);
-
-    _gitHubRepositoryLoadingModel
-      ..clear()
-      ..startLoading();
-
-    final response = await http.get(Uri.parse(
-        'https://api.github.com/search/repositories?q=' +
-            searchQuery +
-            "&sort=stars&order=desc"));
-
-    _gitHubRepositoryLoadingModel.stopLoading();
-
-    if (response.statusCode == 200) {
-      List<GitHubRepository> list = [];
-      Map<String, dynamic> decoded = json.decode(response.body);
-      for (var item in decoded['items']) {
-        list.add(GitHubRepository.fromJson(item));
-      }
-      _gitHubRepositoryLoadingModel.addAll(list);
-    } else {
-      throw Exception('fail to search repositories.');
-    }
   }
 }
