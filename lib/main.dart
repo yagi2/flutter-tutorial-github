@@ -199,8 +199,9 @@ class _StatefulProviderState extends State<_StatefulProvider> {
     var _gitHubRepositoryLoadingModel =
         Provider.of<GitHubRepositoryLoadingModel>(context, listen: false);
 
-    _gitHubRepositoryLoadingModel.clear();
-    _gitHubRepositoryLoadingModel.startLoading();
+    _gitHubRepositoryLoadingModel
+      ..clear()
+      ..startLoading();
 
     final response = await http.get(Uri.parse(
         'https://api.github.com/search/repositories?q=' +
