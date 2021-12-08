@@ -2,39 +2,30 @@ import 'dart:convert' show json;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tutorial_github/model/github_repository.dart';
+import 'package:flutter_tutorial_github/ui/list/repository_list_state.dart';
 import 'package:http/http.dart' as http;
 
-class GitHubRepositoryLoadingModel {
-  GitHubRepositoryLoadingModel(this.repositories, this.isLoading);
+final repositoryListViewModelProvider = StateNotifierProvider.autoDispose<
+    RepositoryListViewModel,
+    RepositoryListState>((_) => RepositoryListViewModel());
 
-  List<GitHubRepository> repositories = [];
-  bool isLoading = false;
-}
-
-final gitHubRepositoryLoadingModelNotifierProvider = StateNotifierProvider<
-    GitHubRepositoryLoadingModelStateNotifier, GitHubRepositoryLoadingModel>(
-  (_) => GitHubRepositoryLoadingModelStateNotifier(),
-);
-
-class GitHubRepositoryLoadingModelStateNotifier
-    extends StateNotifier<GitHubRepositoryLoadingModel> {
-  GitHubRepositoryLoadingModelStateNotifier()
-      : super(GitHubRepositoryLoadingModel([], false));
+class RepositoryListViewModel extends StateNotifier<RepositoryListState> {
+  RepositoryListViewModel() : super(const RepositoryListState());
 
   void _startLoading() {
-    state = GitHubRepositoryLoadingModel(state.repositories, true);
+    state = state.copyWith(isLoading: true);
   }
 
   void _stopLoading() {
-    state = GitHubRepositoryLoadingModel(state.repositories, false);
+    state = state.copyWith(isLoading: false);
   }
 
   void _addAll(List<GitHubRepository> repositories) {
-    state = GitHubRepositoryLoadingModel(repositories, state.isLoading);
+    state = state.copyWith(repositories: repositories);
   }
 
   void _clear() {
-    state = GitHubRepositoryLoadingModel([], state.isLoading);
+    state = state.copyWith(repositories: []);
   }
 
   void searchRepositories(String searchQuery) async {
