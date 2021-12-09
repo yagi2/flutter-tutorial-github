@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'github_repository.dart';
+part of 'repository.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,15 +13,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-GitHubRepository _$GitHubRepositoryFromJson(Map<String, dynamic> json) {
-  return _GitHubRepository.fromJson(json);
+Repository _$RepositoryFromJson(Map<String, dynamic> json) {
+  return _Repository.fromJson(json);
 }
 
 /// @nodoc
-class _$GitHubRepositoryTearOff {
-  const _$GitHubRepositoryTearOff();
+class _$RepositoryTearOff {
+  const _$RepositoryTearOff();
 
-  _GitHubRepository call(
+  _Repository call(
       {@JsonKey(name: 'full_name') String fullName = "",
       @JsonKey(name: 'name') String name = "",
       @JsonKey(name: 'description') String? description,
@@ -30,7 +30,7 @@ class _$GitHubRepositoryTearOff {
       @JsonKey(name: 'stargazers_count') int stargazersCount = 0,
       @JsonKey(name: 'watchers_count') int watchersCount = 0,
       @JsonKey(name: 'forks_count') int forksCount = 0}) {
-    return _GitHubRepository(
+    return _Repository(
       fullName: fullName,
       name: name,
       description: description,
@@ -42,16 +42,16 @@ class _$GitHubRepositoryTearOff {
     );
   }
 
-  GitHubRepository fromJson(Map<String, Object?> json) {
-    return GitHubRepository.fromJson(json);
+  Repository fromJson(Map<String, Object?> json) {
+    return Repository.fromJson(json);
   }
 }
 
 /// @nodoc
-const $GitHubRepository = _$GitHubRepositoryTearOff();
+const $Repository = _$RepositoryTearOff();
 
 /// @nodoc
-mixin _$GitHubRepository {
+mixin _$Repository {
   @JsonKey(name: 'full_name')
   String get fullName => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
@@ -71,15 +71,15 @@ mixin _$GitHubRepository {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GitHubRepositoryCopyWith<GitHubRepository> get copyWith =>
+  $RepositoryCopyWith<Repository> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GitHubRepositoryCopyWith<$Res> {
-  factory $GitHubRepositoryCopyWith(
-          GitHubRepository value, $Res Function(GitHubRepository) then) =
-      _$GitHubRepositoryCopyWithImpl<$Res>;
+abstract class $RepositoryCopyWith<$Res> {
+  factory $RepositoryCopyWith(
+          Repository value, $Res Function(Repository) then) =
+      _$RepositoryCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'full_name') String fullName,
       @JsonKey(name: 'name') String name,
@@ -92,13 +92,12 @@ abstract class $GitHubRepositoryCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GitHubRepositoryCopyWithImpl<$Res>
-    implements $GitHubRepositoryCopyWith<$Res> {
-  _$GitHubRepositoryCopyWithImpl(this._value, this._then);
+class _$RepositoryCopyWithImpl<$Res> implements $RepositoryCopyWith<$Res> {
+  _$RepositoryCopyWithImpl(this._value, this._then);
 
-  final GitHubRepository _value;
+  final Repository _value;
   // ignore: unused_field
-  final $Res Function(GitHubRepository) _then;
+  final $Res Function(Repository) _then;
 
   @override
   $Res call({
@@ -149,11 +148,10 @@ class _$GitHubRepositoryCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$GitHubRepositoryCopyWith<$Res>
-    implements $GitHubRepositoryCopyWith<$Res> {
-  factory _$GitHubRepositoryCopyWith(
-          _GitHubRepository value, $Res Function(_GitHubRepository) then) =
-      __$GitHubRepositoryCopyWithImpl<$Res>;
+abstract class _$RepositoryCopyWith<$Res> implements $RepositoryCopyWith<$Res> {
+  factory _$RepositoryCopyWith(
+          _Repository value, $Res Function(_Repository) then) =
+      __$RepositoryCopyWithImpl<$Res>;
   @override
   $Res call(
       {@JsonKey(name: 'full_name') String fullName,
@@ -167,15 +165,14 @@ abstract class _$GitHubRepositoryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$GitHubRepositoryCopyWithImpl<$Res>
-    extends _$GitHubRepositoryCopyWithImpl<$Res>
-    implements _$GitHubRepositoryCopyWith<$Res> {
-  __$GitHubRepositoryCopyWithImpl(
-      _GitHubRepository _value, $Res Function(_GitHubRepository) _then)
-      : super(_value, (v) => _then(v as _GitHubRepository));
+class __$RepositoryCopyWithImpl<$Res> extends _$RepositoryCopyWithImpl<$Res>
+    implements _$RepositoryCopyWith<$Res> {
+  __$RepositoryCopyWithImpl(
+      _Repository _value, $Res Function(_Repository) _then)
+      : super(_value, (v) => _then(v as _Repository));
 
   @override
-  _GitHubRepository get _value => super._value as _GitHubRepository;
+  _Repository get _value => super._value as _Repository;
 
   @override
   $Res call({
@@ -188,7 +185,7 @@ class __$GitHubRepositoryCopyWithImpl<$Res>
     Object? watchersCount = freezed,
     Object? forksCount = freezed,
   }) {
-    return _then(_GitHubRepository(
+    return _then(_Repository(
       fullName: fullName == freezed
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
@@ -227,8 +224,8 @@ class __$GitHubRepositoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GitHubRepository implements _GitHubRepository {
-  const _$_GitHubRepository(
+class _$_Repository implements _Repository {
+  const _$_Repository(
       {@JsonKey(name: 'full_name') this.fullName = "",
       @JsonKey(name: 'name') this.name = "",
       @JsonKey(name: 'description') this.description,
@@ -238,8 +235,8 @@ class _$_GitHubRepository implements _GitHubRepository {
       @JsonKey(name: 'watchers_count') this.watchersCount = 0,
       @JsonKey(name: 'forks_count') this.forksCount = 0});
 
-  factory _$_GitHubRepository.fromJson(Map<String, dynamic> json) =>
-      _$$_GitHubRepositoryFromJson(json);
+  factory _$_Repository.fromJson(Map<String, dynamic> json) =>
+      _$$_RepositoryFromJson(json);
 
   @override
   @JsonKey(name: 'full_name')
@@ -268,14 +265,14 @@ class _$_GitHubRepository implements _GitHubRepository {
 
   @override
   String toString() {
-    return 'GitHubRepository(fullName: $fullName, name: $name, description: $description, language: $language, htmlUrl: $htmlUrl, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount)';
+    return 'Repository(fullName: $fullName, name: $name, description: $description, language: $language, htmlUrl: $htmlUrl, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GitHubRepository &&
+            other is _Repository &&
             const DeepCollectionEquality().equals(other.fullName, fullName) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
@@ -304,17 +301,17 @@ class _$_GitHubRepository implements _GitHubRepository {
 
   @JsonKey(ignore: true)
   @override
-  _$GitHubRepositoryCopyWith<_GitHubRepository> get copyWith =>
-      __$GitHubRepositoryCopyWithImpl<_GitHubRepository>(this, _$identity);
+  _$RepositoryCopyWith<_Repository> get copyWith =>
+      __$RepositoryCopyWithImpl<_Repository>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GitHubRepositoryToJson(this);
+    return _$$_RepositoryToJson(this);
   }
 }
 
-abstract class _GitHubRepository implements GitHubRepository {
-  const factory _GitHubRepository(
+abstract class _Repository implements Repository {
+  const factory _Repository(
       {@JsonKey(name: 'full_name') String fullName,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'description') String? description,
@@ -322,10 +319,10 @@ abstract class _GitHubRepository implements GitHubRepository {
       @JsonKey(name: 'html_url') String htmlUrl,
       @JsonKey(name: 'stargazers_count') int stargazersCount,
       @JsonKey(name: 'watchers_count') int watchersCount,
-      @JsonKey(name: 'forks_count') int forksCount}) = _$_GitHubRepository;
+      @JsonKey(name: 'forks_count') int forksCount}) = _$_Repository;
 
-  factory _GitHubRepository.fromJson(Map<String, dynamic> json) =
-      _$_GitHubRepository.fromJson;
+  factory _Repository.fromJson(Map<String, dynamic> json) =
+      _$_Repository.fromJson;
 
   @override
   @JsonKey(name: 'full_name')
@@ -353,6 +350,6 @@ abstract class _GitHubRepository implements GitHubRepository {
   int get forksCount;
   @override
   @JsonKey(ignore: true)
-  _$GitHubRepositoryCopyWith<_GitHubRepository> get copyWith =>
+  _$RepositoryCopyWith<_Repository> get copyWith =>
       throw _privateConstructorUsedError;
 }

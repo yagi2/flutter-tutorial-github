@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_tutorial_github/model/repository/github_repository.dart';
+import 'package:flutter_tutorial_github/model/repository/repository.dart';
 import 'package:flutter_tutorial_github/ui/list/repository_list_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,7 +18,7 @@ class RepositoryListViewModel extends StateNotifier<RepositoryListState> {
     state = state.copyWith(isLoading: false);
   }
 
-  void _addAll(List<GitHubRepository> repositories) {
+  void _addAll(List<Repository> repositories) {
     state = state.copyWith(repositories: repositories);
   }
 
@@ -40,9 +40,9 @@ class RepositoryListViewModel extends StateNotifier<RepositoryListState> {
     _stopLoading();
 
     if (response.statusCode == 200) {
-      List<GitHubRepository> list = [];
+      List<Repository> list = [];
       for (var item in response.data['items']) {
-        list.add(GitHubRepository.fromJson(item));
+        list.add(Repository.fromJson(item));
       }
       _addAll(list);
     } else {

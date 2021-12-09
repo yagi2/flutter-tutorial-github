@@ -18,8 +18,7 @@ class _$RepositoryListStateTearOff {
   const _$RepositoryListStateTearOff();
 
   _RepositoryListState call(
-      {List<GitHubRepository> repositories = const [],
-      bool isLoading = false}) {
+      {List<Repository> repositories = const [], bool isLoading = false}) {
     return _RepositoryListState(
       repositories: repositories,
       isLoading: isLoading,
@@ -32,7 +31,7 @@ const $RepositoryListState = _$RepositoryListStateTearOff();
 
 /// @nodoc
 mixin _$RepositoryListState {
-  List<GitHubRepository> get repositories => throw _privateConstructorUsedError;
+  List<Repository> get repositories => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -45,7 +44,7 @@ abstract class $RepositoryListStateCopyWith<$Res> {
   factory $RepositoryListStateCopyWith(
           RepositoryListState value, $Res Function(RepositoryListState) then) =
       _$RepositoryListStateCopyWithImpl<$Res>;
-  $Res call({List<GitHubRepository> repositories, bool isLoading});
+  $Res call({List<Repository> repositories, bool isLoading});
 }
 
 /// @nodoc
@@ -66,7 +65,7 @@ class _$RepositoryListStateCopyWithImpl<$Res>
       repositories: repositories == freezed
           ? _value.repositories
           : repositories // ignore: cast_nullable_to_non_nullable
-              as List<GitHubRepository>,
+              as List<Repository>,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -82,7 +81,7 @@ abstract class _$RepositoryListStateCopyWith<$Res>
           $Res Function(_RepositoryListState) then) =
       __$RepositoryListStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<GitHubRepository> repositories, bool isLoading});
+  $Res call({List<Repository> repositories, bool isLoading});
 }
 
 /// @nodoc
@@ -105,7 +104,7 @@ class __$RepositoryListStateCopyWithImpl<$Res>
       repositories: repositories == freezed
           ? _value.repositories
           : repositories // ignore: cast_nullable_to_non_nullable
-              as List<GitHubRepository>,
+              as List<Repository>,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -122,7 +121,7 @@ class _$_RepositoryListState implements _RepositoryListState {
 
   @JsonKey(defaultValue: const [])
   @override
-  final List<GitHubRepository> repositories;
+  final List<Repository> repositories;
   @JsonKey(defaultValue: false)
   @override
   final bool isLoading;
@@ -157,11 +156,10 @@ class _$_RepositoryListState implements _RepositoryListState {
 
 abstract class _RepositoryListState implements RepositoryListState {
   const factory _RepositoryListState(
-      {List<GitHubRepository> repositories,
-      bool isLoading}) = _$_RepositoryListState;
+      {List<Repository> repositories, bool isLoading}) = _$_RepositoryListState;
 
   @override
-  List<GitHubRepository> get repositories;
+  List<Repository> get repositories;
   @override
   bool get isLoading;
   @override

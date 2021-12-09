@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'github_repository.freezed.dart';
-part 'github_repository.g.dart';
+part 'repository.freezed.dart';
+part 'repository.g.dart';
 
 @freezed
-class GitHubRepository with _$GitHubRepository {
-  const factory GitHubRepository({
+class Repository with _$Repository {
+  const factory Repository({
     @JsonKey(name: 'full_name') @Default("") String fullName,
     @JsonKey(name: 'name') @Default("") String name,
     @JsonKey(name: 'description') String? description,
@@ -14,8 +14,8 @@ class GitHubRepository with _$GitHubRepository {
     @JsonKey(name: 'stargazers_count') @Default(0) int stargazersCount,
     @JsonKey(name: 'watchers_count') @Default(0) int watchersCount,
     @JsonKey(name: 'forks_count') @Default(0) int forksCount,
-  }) = _GitHubRepository;
+  }) = _Repository;
 
-  factory GitHubRepository.fromJson(Map<String, dynamic> json) =>
-      _$GitHubRepositoryFromJson(json);
+  factory Repository.fromJson(Map<String, dynamic> json) =>
+      _$RepositoryFromJson(json);
 }
