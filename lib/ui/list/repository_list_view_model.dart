@@ -1,9 +1,7 @@
-import 'dart:convert' show json;
-
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tutorial_github/model/github_repository.dart';
 import 'package:flutter_tutorial_github/ui/list/repository_list_state.dart';
-import 'package:http/http.dart' as http;
 
 final repositoryListViewModelProvider = StateNotifierProvider.autoDispose<
     RepositoryListViewModel,
@@ -32,17 +30,18 @@ class RepositoryListViewModel extends StateNotifier<RepositoryListState> {
     _clear();
     _startLoading();
 
-    final response = await http.get(Uri.parse(
-        'https://api.github.com/search/repositories?q=' +
-            searchQuery +
-            "&sort=stars&order=desc"));
+    final response = await Dio(BaseOptions(
+      baseUrl: 'https://api.github.com',
+    )).get(
+      '/search/repositories',
+      queryParameters: {'q': searchQuery, 'sort': "stars", 'order': "desc"},
+    );
 
     _stopLoading();
 
     if (response.statusCode == 200) {
       List<GitHubRepository> list = [];
-      Map<String, dynamic> decoded = json.decode(response.body);
-      for (var item in decoded['items']) {
+      for (var item in response.data['items']) {
         list.add(GitHubRepository.fromJson(item));
       }
       _addAll(list);
