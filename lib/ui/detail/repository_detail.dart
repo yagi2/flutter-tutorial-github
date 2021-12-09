@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_tutorial_github/model/github_repository.dart';
+import 'package:flutter_tutorial_github/model/repository/github_repository.dart';
 import 'package:flutter_tutorial_github/ui/detail/repository_detail_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

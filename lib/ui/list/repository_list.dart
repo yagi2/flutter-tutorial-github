@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tutorial_github/model/github_repository.dart';
+import 'package:flutter_tutorial_github/model/repository/github_repository.dart';
 import 'package:flutter_tutorial_github/ui/detail/repository_detail.dart';
 import 'package:flutter_tutorial_github/ui/list/repository_list_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

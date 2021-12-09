@@ -1,4 +1,4 @@
-import 'package:flutter_tutorial_github/model/github_repository.dart';
+import 'package:flutter_tutorial_github/model/repository/github_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'repository_list_state.freezed.dart';
