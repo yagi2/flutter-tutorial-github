@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tutorial_github/model/github_repository.dart';
 import 'package:flutter_tutorial_github/ui/detail/repository_detail.dart';
 import 'package:flutter_tutorial_github/ui/list/repository_list_view_model.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RepositoryList extends StatelessWidget {
   const RepositoryList({Key? key}) : super(key: key);
