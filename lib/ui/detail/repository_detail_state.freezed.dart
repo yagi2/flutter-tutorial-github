@@ -17,10 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RepositoryDetailStateTearOff {
   const _$RepositoryDetailStateTearOff();
 
-  _RepositoryDetailState call({String text = "", bool isLoading = false}) {
+  _RepositoryDetailState call({Owner? owner}) {
     return _RepositoryDetailState(
-      text: text,
-      isLoading: isLoading,
+      owner: owner,
     );
   }
 }
@@ -30,8 +29,7 @@ const $RepositoryDetailState = _$RepositoryDetailStateTearOff();
 
 /// @nodoc
 mixin _$RepositoryDetailState {
-  String get text => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
+  Owner? get owner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RepositoryDetailStateCopyWith<RepositoryDetailState> get copyWith =>
@@ -43,7 +41,9 @@ abstract class $RepositoryDetailStateCopyWith<$Res> {
   factory $RepositoryDetailStateCopyWith(RepositoryDetailState value,
           $Res Function(RepositoryDetailState) then) =
       _$RepositoryDetailStateCopyWithImpl<$Res>;
-  $Res call({String text, bool isLoading});
+  $Res call({Owner? owner});
+
+  $OwnerCopyWith<$Res>? get owner;
 }
 
 /// @nodoc
@@ -57,19 +57,25 @@ class _$RepositoryDetailStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? text = freezed,
-    Object? isLoading = freezed,
+    Object? owner = freezed,
   }) {
     return _then(_value.copyWith(
-      text: text == freezed
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      isLoading: isLoading == freezed
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      owner: owner == freezed
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as Owner?,
     ));
+  }
+
+  @override
+  $OwnerCopyWith<$Res>? get owner {
+    if (_value.owner == null) {
+      return null;
+    }
+
+    return $OwnerCopyWith<$Res>(_value.owner!, (value) {
+      return _then(_value.copyWith(owner: value));
+    });
   }
 }
 
@@ -80,7 +86,10 @@ abstract class _$RepositoryDetailStateCopyWith<$Res>
           $Res Function(_RepositoryDetailState) then) =
       __$RepositoryDetailStateCopyWithImpl<$Res>;
   @override
-  $Res call({String text, bool isLoading});
+  $Res call({Owner? owner});
+
+  @override
+  $OwnerCopyWith<$Res>? get owner;
 }
 
 /// @nodoc
@@ -96,18 +105,13 @@ class __$RepositoryDetailStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? text = freezed,
-    Object? isLoading = freezed,
+    Object? owner = freezed,
   }) {
     return _then(_RepositoryDetailState(
-      text: text == freezed
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      isLoading: isLoading == freezed
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      owner: owner == freezed
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as Owner?,
     ));
   }
 }
@@ -115,18 +119,14 @@ class __$RepositoryDetailStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RepositoryDetailState implements _RepositoryDetailState {
-  const _$_RepositoryDetailState({this.text = "", this.isLoading = false});
+  const _$_RepositoryDetailState({this.owner});
 
-  @JsonKey(defaultValue: "")
   @override
-  final String text;
-  @JsonKey(defaultValue: false)
-  @override
-  final bool isLoading;
+  final Owner? owner;
 
   @override
   String toString() {
-    return 'RepositoryDetailState(text: $text, isLoading: $isLoading)';
+    return 'RepositoryDetailState(owner: $owner)';
   }
 
   @override
@@ -134,15 +134,12 @@ class _$_RepositoryDetailState implements _RepositoryDetailState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RepositoryDetailState &&
-            const DeepCollectionEquality().equals(other.text, text) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other.owner, owner));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(isLoading));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(owner));
 
   @JsonKey(ignore: true)
   @override
@@ -152,13 +149,11 @@ class _$_RepositoryDetailState implements _RepositoryDetailState {
 }
 
 abstract class _RepositoryDetailState implements RepositoryDetailState {
-  const factory _RepositoryDetailState({String text, bool isLoading}) =
+  const factory _RepositoryDetailState({Owner? owner}) =
       _$_RepositoryDetailState;
 
   @override
-  String get text;
-  @override
-  bool get isLoading;
+  Owner? get owner;
   @override
   @JsonKey(ignore: true)
   _$RepositoryDetailStateCopyWith<_RepositoryDetailState> get copyWith =>

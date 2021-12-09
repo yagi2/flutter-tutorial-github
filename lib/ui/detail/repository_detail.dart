@@ -21,9 +21,14 @@ class RepositoryDetail extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(repository.fullName)),
       body: Center(
-        child: repositoryDetailState.text.isEmpty
+        child: repositoryDetailState.owner == null
             ? const CircularProgressIndicator()
-            : Text(repositoryDetailState.text),
+            : CircleAvatar(
+                radius: 80,
+                child: null,
+                backgroundImage:
+                    Image.network(repositoryDetailState.owner!.avatarUrl).image,
+              ),
       ),
     );
   }
