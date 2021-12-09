@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tutorial_github/model/github_repository.dart';
-import 'package:flutter_tutorial_github/ui/detail/github_repository_detail_page.dart';
+import 'package:flutter_tutorial_github/ui/detail/repository_detail.dart';
 import 'package:flutter_tutorial_github/ui/list/repository_list_view_model.dart';
 
 class RepositoryList extends StatelessWidget {
@@ -11,21 +11,18 @@ class RepositoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const <Widget>[
-        _GitHubRepositorySearchInputWidget(),
-        Expanded(child: _GitHubRepositoryListWithProgressWidget()),
+        _RepositorySearchInputWidget(),
+        Expanded(child: _RepositoryListWithProgressWidget()),
       ],
     );
   }
 }
 
-class _GitHubRepositorySearchInputWidget extends ConsumerWidget {
-  const _GitHubRepositorySearchInputWidget({Key? key}) : super(key: key);
+class _RepositorySearchInputWidget extends ConsumerWidget {
+  const _RepositorySearchInputWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gitHubRepositoryLoadingModelNotifier =
-        ref.watch(repositoryListViewModelProvider.notifier);
-
     return Container(
       margin: const EdgeInsets.all(16.0),
       child: TextField(
@@ -35,20 +32,21 @@ class _GitHubRepositorySearchInputWidget extends ConsumerWidget {
           labelText: "Search",
         ),
         onSubmitted: (input) {
-          gitHubRepositoryLoadingModelNotifier.searchRepositories(input);
+          ref
+              .read(repositoryListViewModelProvider.notifier)
+              .searchRepositories(input);
         },
       ),
     );
   }
 }
 
-class _GitHubRepositoryListWithProgressWidget extends ConsumerWidget {
-  const _GitHubRepositoryListWithProgressWidget({Key? key}) : super(key: key);
+class _RepositoryListWithProgressWidget extends ConsumerWidget {
+  const _RepositoryListWithProgressWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gitHubRepositoryLoadingModel =
-        ref.watch(repositoryListViewModelProvider);
+    final viewModel = ref.watch(repositoryListViewModelProvider);
 
     return Stack(
       children: [
@@ -56,12 +54,12 @@ class _GitHubRepositoryListWithProgressWidget extends ConsumerWidget {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return _GitHubRepositoryCardWidget(
-                repository: gitHubRepositoryLoadingModel.repositories[index]);
+            return _RepositoryCardWidget(
+                repository: viewModel.repositories[index]);
           },
-          itemCount: gitHubRepositoryLoadingModel.repositories.length,
+          itemCount: viewModel.repositories.length,
         ),
-        gitHubRepositoryLoadingModel.isLoading
+        viewModel.isLoading
             ? const Center(child: CircularProgressIndicator())
             : Container()
       ],
@@ -69,8 +67,8 @@ class _GitHubRepositoryListWithProgressWidget extends ConsumerWidget {
   }
 }
 
-class _GitHubRepositoryCardWidget extends StatelessWidget {
-  const _GitHubRepositoryCardWidget({Key? key, required this.repository})
+class _RepositoryCardWidget extends StatelessWidget {
+  const _RepositoryCardWidget({Key? key, required this.repository})
       : super(key: key);
 
   final GitHubRepository repository;
@@ -82,7 +80,7 @@ class _GitHubRepositoryCardWidget extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return GitHubRepositoryDetailPage(repository: repository);
+              return RepositoryDetail(repository: repository);
             }));
           },
           child: Column(
