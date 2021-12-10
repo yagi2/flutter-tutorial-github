@@ -18,7 +18,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text("GitHub Repository search")),
-        body: const RepositoryList(),
+        body: const RepositoryListPage(),
       ),
     );
   }

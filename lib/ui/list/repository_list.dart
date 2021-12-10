@@ -4,8 +4,8 @@ import 'package:flutter_tutorial_github/ui/detail/repository_detail.dart';
 import 'package:flutter_tutorial_github/ui/list/repository_list_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RepositoryList extends StatelessWidget {
-  const RepositoryList({Key? key}) : super(key: key);
+class RepositoryListPage extends StatelessWidget {
+  const RepositoryListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
