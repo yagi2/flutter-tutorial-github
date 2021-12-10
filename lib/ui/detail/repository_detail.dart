@@ -46,13 +46,14 @@ class NameCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      margin: const EdgeInsets.all(16),
       elevation: 4,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
             child: SizedBox(
               width: 64,
               height: 64,
@@ -68,7 +69,7 @@ class NameCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Padding(
-                padding: EdgeInsets.fromLTRB(16, 8, 0, 0),
+                padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
                 child: Text(
                   'Repository Owner',
                   style: TextStyle(
@@ -92,7 +93,7 @@ class NameCardWidget extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(16, 0, 0, 16),
                 child: Text(repositoryDetail.name),
               ),
             ],
