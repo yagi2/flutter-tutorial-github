@@ -1,4 +1,4 @@
-import 'package:flutter_tutorial_github/model/owner/owner.dart';
+import 'package:flutter_tutorial_github/model/repository_detail/owner/owner.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'repository_detail.freezed.dart';
