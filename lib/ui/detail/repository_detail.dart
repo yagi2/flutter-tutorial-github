@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_tutorial_github/model/repository/repository.dart';
 import 'package:flutter_tutorial_github/model/repository_detail/repository_detail.dart';
 import 'package:flutter_tutorial_github/ui/detail/repository_detail_view_model.dart';
+import 'package:flutter_tutorial_github/ui/webview/webview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RepositoryDetailPage extends HookConsumerWidget {
@@ -71,9 +72,14 @@ class RepositoryDetailContainer extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
               child: ElevatedButton(
-                onPressed: () {
-                  //TODO: open webview
-                },
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute<WebViewPage>(
+                    builder: (_) => WebViewPage(
+                      url: repositoryDetail.htmlUrl,
+                    ),
+                  ),
+                ),
                 child: const Text('Visit Github.com'),
               ),
             ),
