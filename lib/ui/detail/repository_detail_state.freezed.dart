@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RepositoryDetailStateTearOff {
   const _$RepositoryDetailStateTearOff();
 
-  _RepositoryDetailState call({Owner? owner}) {
+  _RepositoryDetailState call({RepositoryDetail? repositoryDetail}) {
     return _RepositoryDetailState(
-      owner: owner,
+      repositoryDetail: repositoryDetail,
     );
   }
 }
@@ -29,7 +29,7 @@ const $RepositoryDetailState = _$RepositoryDetailStateTearOff();
 
 /// @nodoc
 mixin _$RepositoryDetailState {
-  Owner? get owner => throw _privateConstructorUsedError;
+  RepositoryDetail? get repositoryDetail => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RepositoryDetailStateCopyWith<RepositoryDetailState> get copyWith =>
@@ -41,9 +41,9 @@ abstract class $RepositoryDetailStateCopyWith<$Res> {
   factory $RepositoryDetailStateCopyWith(RepositoryDetailState value,
           $Res Function(RepositoryDetailState) then) =
       _$RepositoryDetailStateCopyWithImpl<$Res>;
-  $Res call({Owner? owner});
+  $Res call({RepositoryDetail? repositoryDetail});
 
-  $OwnerCopyWith<$Res>? get owner;
+  $RepositoryDetailCopyWith<$Res>? get repositoryDetail;
 }
 
 /// @nodoc
@@ -57,24 +57,24 @@ class _$RepositoryDetailStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? owner = freezed,
+    Object? repositoryDetail = freezed,
   }) {
     return _then(_value.copyWith(
-      owner: owner == freezed
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
-              as Owner?,
+      repositoryDetail: repositoryDetail == freezed
+          ? _value.repositoryDetail
+          : repositoryDetail // ignore: cast_nullable_to_non_nullable
+              as RepositoryDetail?,
     ));
   }
 
   @override
-  $OwnerCopyWith<$Res>? get owner {
-    if (_value.owner == null) {
+  $RepositoryDetailCopyWith<$Res>? get repositoryDetail {
+    if (_value.repositoryDetail == null) {
       return null;
     }
 
-    return $OwnerCopyWith<$Res>(_value.owner!, (value) {
-      return _then(_value.copyWith(owner: value));
+    return $RepositoryDetailCopyWith<$Res>(_value.repositoryDetail!, (value) {
+      return _then(_value.copyWith(repositoryDetail: value));
     });
   }
 }
@@ -86,10 +86,10 @@ abstract class _$RepositoryDetailStateCopyWith<$Res>
           $Res Function(_RepositoryDetailState) then) =
       __$RepositoryDetailStateCopyWithImpl<$Res>;
   @override
-  $Res call({Owner? owner});
+  $Res call({RepositoryDetail? repositoryDetail});
 
   @override
-  $OwnerCopyWith<$Res>? get owner;
+  $RepositoryDetailCopyWith<$Res>? get repositoryDetail;
 }
 
 /// @nodoc
@@ -105,13 +105,13 @@ class __$RepositoryDetailStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? owner = freezed,
+    Object? repositoryDetail = freezed,
   }) {
     return _then(_RepositoryDetailState(
-      owner: owner == freezed
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
-              as Owner?,
+      repositoryDetail: repositoryDetail == freezed
+          ? _value.repositoryDetail
+          : repositoryDetail // ignore: cast_nullable_to_non_nullable
+              as RepositoryDetail?,
     ));
   }
 }
@@ -119,14 +119,14 @@ class __$RepositoryDetailStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RepositoryDetailState implements _RepositoryDetailState {
-  const _$_RepositoryDetailState({this.owner});
+  const _$_RepositoryDetailState({this.repositoryDetail});
 
   @override
-  final Owner? owner;
+  final RepositoryDetail? repositoryDetail;
 
   @override
   String toString() {
-    return 'RepositoryDetailState(owner: $owner)';
+    return 'RepositoryDetailState(repositoryDetail: $repositoryDetail)';
   }
 
   @override
@@ -134,12 +134,13 @@ class _$_RepositoryDetailState implements _RepositoryDetailState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RepositoryDetailState &&
-            const DeepCollectionEquality().equals(other.owner, owner));
+            const DeepCollectionEquality()
+                .equals(other.repositoryDetail, repositoryDetail));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(owner));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(repositoryDetail));
 
   @JsonKey(ignore: true)
   @override
@@ -149,11 +150,11 @@ class _$_RepositoryDetailState implements _RepositoryDetailState {
 }
 
 abstract class _RepositoryDetailState implements RepositoryDetailState {
-  const factory _RepositoryDetailState({Owner? owner}) =
+  const factory _RepositoryDetailState({RepositoryDetail? repositoryDetail}) =
       _$_RepositoryDetailState;
 
   @override
-  Owner? get owner;
+  RepositoryDetail? get repositoryDetail;
   @override
   @JsonKey(ignore: true)
   _$RepositoryDetailStateCopyWith<_RepositoryDetailState> get copyWith =>

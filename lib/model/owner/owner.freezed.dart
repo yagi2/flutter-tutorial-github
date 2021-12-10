@@ -22,10 +22,10 @@ class _$OwnerTearOff {
   const _$OwnerTearOff();
 
   _Owner call(
-      {@JsonKey(name: 'login') String ownerName = "",
+      {@JsonKey(name: 'login') String name = "",
       @JsonKey(name: 'avatar_url') String avatarUrl = ""}) {
     return _Owner(
-      ownerName: ownerName,
+      name: name,
       avatarUrl: avatarUrl,
     );
   }
@@ -41,7 +41,7 @@ const $Owner = _$OwnerTearOff();
 /// @nodoc
 mixin _$Owner {
   @JsonKey(name: 'login')
-  String get ownerName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'avatar_url')
   String get avatarUrl => throw _privateConstructorUsedError;
 
@@ -55,7 +55,7 @@ abstract class $OwnerCopyWith<$Res> {
   factory $OwnerCopyWith(Owner value, $Res Function(Owner) then) =
       _$OwnerCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'login') String ownerName,
+      {@JsonKey(name: 'login') String name,
       @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
@@ -69,13 +69,13 @@ class _$OwnerCopyWithImpl<$Res> implements $OwnerCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? ownerName = freezed,
+    Object? name = freezed,
     Object? avatarUrl = freezed,
   }) {
     return _then(_value.copyWith(
-      ownerName: ownerName == freezed
-          ? _value.ownerName
-          : ownerName // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       avatarUrl: avatarUrl == freezed
           ? _value.avatarUrl
@@ -91,7 +91,7 @@ abstract class _$OwnerCopyWith<$Res> implements $OwnerCopyWith<$Res> {
       __$OwnerCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'login') String ownerName,
+      {@JsonKey(name: 'login') String name,
       @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
@@ -106,13 +106,13 @@ class __$OwnerCopyWithImpl<$Res> extends _$OwnerCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? ownerName = freezed,
+    Object? name = freezed,
     Object? avatarUrl = freezed,
   }) {
     return _then(_Owner(
-      ownerName: ownerName == freezed
-          ? _value.ownerName
-          : ownerName // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       avatarUrl: avatarUrl == freezed
           ? _value.avatarUrl
@@ -126,7 +126,7 @@ class __$OwnerCopyWithImpl<$Res> extends _$OwnerCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Owner implements _Owner {
   const _$_Owner(
-      {@JsonKey(name: 'login') this.ownerName = "",
+      {@JsonKey(name: 'login') this.name = "",
       @JsonKey(name: 'avatar_url') this.avatarUrl = ""});
 
   factory _$_Owner.fromJson(Map<String, dynamic> json) =>
@@ -134,14 +134,14 @@ class _$_Owner implements _Owner {
 
   @override
   @JsonKey(name: 'login')
-  final String ownerName;
+  final String name;
   @override
   @JsonKey(name: 'avatar_url')
   final String avatarUrl;
 
   @override
   String toString() {
-    return 'Owner(ownerName: $ownerName, avatarUrl: $avatarUrl)';
+    return 'Owner(name: $name, avatarUrl: $avatarUrl)';
   }
 
   @override
@@ -149,14 +149,14 @@ class _$_Owner implements _Owner {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Owner &&
-            const DeepCollectionEquality().equals(other.ownerName, ownerName) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(ownerName),
+      const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(avatarUrl));
 
   @JsonKey(ignore: true)
@@ -172,14 +172,14 @@ class _$_Owner implements _Owner {
 
 abstract class _Owner implements Owner {
   const factory _Owner(
-      {@JsonKey(name: 'login') String ownerName,
+      {@JsonKey(name: 'login') String name,
       @JsonKey(name: 'avatar_url') String avatarUrl}) = _$_Owner;
 
   factory _Owner.fromJson(Map<String, dynamic> json) = _$_Owner.fromJson;
 
   @override
   @JsonKey(name: 'login')
-  String get ownerName;
+  String get name;
   @override
   @JsonKey(name: 'avatar_url')
   String get avatarUrl;

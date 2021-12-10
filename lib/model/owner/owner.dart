@@ -7,7 +7,7 @@ part 'owner.g.dart';
 @freezed
 class Owner with _$Owner {
   const factory Owner({
-    @JsonKey(name: 'login') @Default("") String ownerName,
+    @JsonKey(name: 'login') @Default("") String name,
     @JsonKey(name: 'avatar_url') @Default("") String avatarUrl,
   }) = _Owner;
 

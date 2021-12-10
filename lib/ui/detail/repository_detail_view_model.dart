@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_tutorial_github/model/owner/owner.dart';
+import 'package:flutter_tutorial_github/model/repository_detail/repository_detail.dart';
 import 'package:flutter_tutorial_github/ui/detail/repository_detail_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,6 +15,7 @@ class RepositoryDetailViewModel extends StateNotifier<RepositoryDetailState> {
       BaseOptions(baseUrl: 'https://api.github.com'),
     ).get('/repos/$repositoryFullName');
 
-    state = state.copyWith(owner: Owner.fromJson(response.data['owner']));
+    state = state.copyWith(
+        repositoryDetail: RepositoryDetail.fromJson(response.data));
   }
 }

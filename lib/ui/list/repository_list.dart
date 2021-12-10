@@ -80,7 +80,7 @@ class _RepositoryCardWidget extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return RepositoryDetail(repository: repository);
+              return RepositoryDetailPage(repository: repository);
             }));
           },
           child: Column(
