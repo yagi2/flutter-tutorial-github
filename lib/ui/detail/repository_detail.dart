@@ -21,17 +21,64 @@ class RepositoryDetailPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(repository.fullName)),
-      body: Center(
-        child: repositoryDetailState.repositoryDetail == null
-            ? const CircularProgressIndicator()
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  NameCardWidget(
-                    repositoryDetail: repositoryDetailState.repositoryDetail!,
-                  ),
-                ],
+      body: repositoryDetailState.repositoryDetail == null
+          ? const Center(child: CircularProgressIndicator())
+          : RepositoryDetailContainer(
+              repositoryDetail: repositoryDetailState.repositoryDetail!,
+            ),
+    );
+  }
+}
+
+class RepositoryDetailContainer extends StatelessWidget {
+  const RepositoryDetailContainer({Key? key, required this.repositoryDetail})
+      : super(key: key);
+
+  final RepositoryDetail repositoryDetail;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 28),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          NameCardWidget(
+            repositoryDetail: repositoryDetail,
+          ),
+          LabelDescriptionWidget(
+            label: 'Description',
+            content: repositoryDetail.description,
+          ),
+          LabelDescriptionWidget(
+            label: 'Language',
+            content: repositoryDetail.lang,
+          ),
+          LabelDescriptionWidget(
+            label: 'Stars',
+            content: repositoryDetail.stars.toString(),
+          ),
+          LabelDescriptionWidget(
+            label: 'Watchers',
+            content: repositoryDetail.watchers.toString(),
+          ),
+          LabelDescriptionWidget(
+            label: 'Forks',
+            content: repositoryDetail.forks.toString(),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              child: ElevatedButton(
+                onPressed: () {
+                  //TODO: open webview
+                },
+                child: const Text('Visit Github.com'),
               ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -53,7 +100,7 @@ class NameCardWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
             child: SizedBox(
               width: 64,
               height: 64,
@@ -101,5 +148,36 @@ class NameCardWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class LabelDescriptionWidget extends StatelessWidget {
+  const LabelDescriptionWidget({Key? key, required this.label, this.content})
+      : super(key: key);
+
+  final String label;
+  final String? content;
+
+  @override
+  Widget build(BuildContext context) {
+    return content != null
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+                child: Text(content!),
+              )
+            ],
+          )
+        : Container();
   }
 }

@@ -23,9 +23,21 @@ class _$RepositoryDetailTearOff {
 
   _RepositoryDetail call(
       {@JsonKey(name: 'name') String name = '',
+      @JsonKey(name: 'description') String? description,
+      @JsonKey(name: 'language') String? lang,
+      @JsonKey(name: 'stargazers_count') int stars = 0,
+      @JsonKey(name: 'watchers_count') int watchers = 0,
+      @JsonKey(name: 'forks_count') int forks = 0,
+      @JsonKey(name: 'html_url') String htmlUrl = '',
       @JsonKey(name: 'owner') Owner owner = const Owner()}) {
     return _RepositoryDetail(
       name: name,
+      description: description,
+      lang: lang,
+      stars: stars,
+      watchers: watchers,
+      forks: forks,
+      htmlUrl: htmlUrl,
       owner: owner,
     );
   }
@@ -42,6 +54,18 @@ const $RepositoryDetail = _$RepositoryDetailTearOff();
 mixin _$RepositoryDetail {
   @JsonKey(name: 'name')
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'description')
+  String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'language')
+  String? get lang => throw _privateConstructorUsedError;
+  @JsonKey(name: 'stargazers_count')
+  int get stars => throw _privateConstructorUsedError;
+  @JsonKey(name: 'watchers_count')
+  int get watchers => throw _privateConstructorUsedError;
+  @JsonKey(name: 'forks_count')
+  int get forks => throw _privateConstructorUsedError;
+  @JsonKey(name: 'html_url')
+  String get htmlUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'owner')
   Owner get owner => throw _privateConstructorUsedError;
 
@@ -58,6 +82,12 @@ abstract class $RepositoryDetailCopyWith<$Res> {
       _$RepositoryDetailCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'name') String name,
+      @JsonKey(name: 'description') String? description,
+      @JsonKey(name: 'language') String? lang,
+      @JsonKey(name: 'stargazers_count') int stars,
+      @JsonKey(name: 'watchers_count') int watchers,
+      @JsonKey(name: 'forks_count') int forks,
+      @JsonKey(name: 'html_url') String htmlUrl,
       @JsonKey(name: 'owner') Owner owner});
 
   $OwnerCopyWith<$Res> get owner;
@@ -75,12 +105,42 @@ class _$RepositoryDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? description = freezed,
+    Object? lang = freezed,
+    Object? stars = freezed,
+    Object? watchers = freezed,
+    Object? forks = freezed,
+    Object? htmlUrl = freezed,
     Object? owner = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lang: lang == freezed
+          ? _value.lang
+          : lang // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stars: stars == freezed
+          ? _value.stars
+          : stars // ignore: cast_nullable_to_non_nullable
+              as int,
+      watchers: watchers == freezed
+          ? _value.watchers
+          : watchers // ignore: cast_nullable_to_non_nullable
+              as int,
+      forks: forks == freezed
+          ? _value.forks
+          : forks // ignore: cast_nullable_to_non_nullable
+              as int,
+      htmlUrl: htmlUrl == freezed
+          ? _value.htmlUrl
+          : htmlUrl // ignore: cast_nullable_to_non_nullable
               as String,
       owner: owner == freezed
           ? _value.owner
@@ -106,6 +166,12 @@ abstract class _$RepositoryDetailCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'name') String name,
+      @JsonKey(name: 'description') String? description,
+      @JsonKey(name: 'language') String? lang,
+      @JsonKey(name: 'stargazers_count') int stars,
+      @JsonKey(name: 'watchers_count') int watchers,
+      @JsonKey(name: 'forks_count') int forks,
+      @JsonKey(name: 'html_url') String htmlUrl,
       @JsonKey(name: 'owner') Owner owner});
 
   @override
@@ -126,12 +192,42 @@ class __$RepositoryDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? description = freezed,
+    Object? lang = freezed,
+    Object? stars = freezed,
+    Object? watchers = freezed,
+    Object? forks = freezed,
+    Object? htmlUrl = freezed,
     Object? owner = freezed,
   }) {
     return _then(_RepositoryDetail(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lang: lang == freezed
+          ? _value.lang
+          : lang // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stars: stars == freezed
+          ? _value.stars
+          : stars // ignore: cast_nullable_to_non_nullable
+              as int,
+      watchers: watchers == freezed
+          ? _value.watchers
+          : watchers // ignore: cast_nullable_to_non_nullable
+              as int,
+      forks: forks == freezed
+          ? _value.forks
+          : forks // ignore: cast_nullable_to_non_nullable
+              as int,
+      htmlUrl: htmlUrl == freezed
+          ? _value.htmlUrl
+          : htmlUrl // ignore: cast_nullable_to_non_nullable
               as String,
       owner: owner == freezed
           ? _value.owner
@@ -146,6 +242,12 @@ class __$RepositoryDetailCopyWithImpl<$Res>
 class _$_RepositoryDetail implements _RepositoryDetail {
   const _$_RepositoryDetail(
       {@JsonKey(name: 'name') this.name = '',
+      @JsonKey(name: 'description') this.description,
+      @JsonKey(name: 'language') this.lang,
+      @JsonKey(name: 'stargazers_count') this.stars = 0,
+      @JsonKey(name: 'watchers_count') this.watchers = 0,
+      @JsonKey(name: 'forks_count') this.forks = 0,
+      @JsonKey(name: 'html_url') this.htmlUrl = '',
       @JsonKey(name: 'owner') this.owner = const Owner()});
 
   factory _$_RepositoryDetail.fromJson(Map<String, dynamic> json) =>
@@ -155,12 +257,30 @@ class _$_RepositoryDetail implements _RepositoryDetail {
   @JsonKey(name: 'name')
   final String name;
   @override
+  @JsonKey(name: 'description')
+  final String? description;
+  @override
+  @JsonKey(name: 'language')
+  final String? lang;
+  @override
+  @JsonKey(name: 'stargazers_count')
+  final int stars;
+  @override
+  @JsonKey(name: 'watchers_count')
+  final int watchers;
+  @override
+  @JsonKey(name: 'forks_count')
+  final int forks;
+  @override
+  @JsonKey(name: 'html_url')
+  final String htmlUrl;
+  @override
   @JsonKey(name: 'owner')
   final Owner owner;
 
   @override
   String toString() {
-    return 'RepositoryDetail(name: $name, owner: $owner)';
+    return 'RepositoryDetail(name: $name, description: $description, lang: $lang, stars: $stars, watchers: $watchers, forks: $forks, htmlUrl: $htmlUrl, owner: $owner)';
   }
 
   @override
@@ -169,6 +289,13 @@ class _$_RepositoryDetail implements _RepositoryDetail {
         (other.runtimeType == runtimeType &&
             other is _RepositoryDetail &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.lang, lang) &&
+            const DeepCollectionEquality().equals(other.stars, stars) &&
+            const DeepCollectionEquality().equals(other.watchers, watchers) &&
+            const DeepCollectionEquality().equals(other.forks, forks) &&
+            const DeepCollectionEquality().equals(other.htmlUrl, htmlUrl) &&
             const DeepCollectionEquality().equals(other.owner, owner));
   }
 
@@ -176,6 +303,12 @@ class _$_RepositoryDetail implements _RepositoryDetail {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(lang),
+      const DeepCollectionEquality().hash(stars),
+      const DeepCollectionEquality().hash(watchers),
+      const DeepCollectionEquality().hash(forks),
+      const DeepCollectionEquality().hash(htmlUrl),
       const DeepCollectionEquality().hash(owner));
 
   @JsonKey(ignore: true)
@@ -192,6 +325,12 @@ class _$_RepositoryDetail implements _RepositoryDetail {
 abstract class _RepositoryDetail implements RepositoryDetail {
   const factory _RepositoryDetail(
       {@JsonKey(name: 'name') String name,
+      @JsonKey(name: 'description') String? description,
+      @JsonKey(name: 'language') String? lang,
+      @JsonKey(name: 'stargazers_count') int stars,
+      @JsonKey(name: 'watchers_count') int watchers,
+      @JsonKey(name: 'forks_count') int forks,
+      @JsonKey(name: 'html_url') String htmlUrl,
       @JsonKey(name: 'owner') Owner owner}) = _$_RepositoryDetail;
 
   factory _RepositoryDetail.fromJson(Map<String, dynamic> json) =
@@ -200,6 +339,24 @@ abstract class _RepositoryDetail implements RepositoryDetail {
   @override
   @JsonKey(name: 'name')
   String get name;
+  @override
+  @JsonKey(name: 'description')
+  String? get description;
+  @override
+  @JsonKey(name: 'language')
+  String? get lang;
+  @override
+  @JsonKey(name: 'stargazers_count')
+  int get stars;
+  @override
+  @JsonKey(name: 'watchers_count')
+  int get watchers;
+  @override
+  @JsonKey(name: 'forks_count')
+  int get forks;
+  @override
+  @JsonKey(name: 'html_url')
+  String get htmlUrl;
   @override
   @JsonKey(name: 'owner')
   Owner get owner;
