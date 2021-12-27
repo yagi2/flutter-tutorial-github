@@ -18,10 +18,17 @@ class _$RepositoryListStateTearOff {
   const _$RepositoryListStateTearOff();
 
   _RepositoryListState call(
-      {List<Repository> repositories = const [], bool isLoading = false}) {
+      {List<Repository> repositories = const [],
+      bool isLoading = false,
+      String searchQuery = '',
+      int page = 1,
+      bool isCompleteLoading = false}) {
     return _RepositoryListState(
       repositories: repositories,
       isLoading: isLoading,
+      searchQuery: searchQuery,
+      page: page,
+      isCompleteLoading: isCompleteLoading,
     );
   }
 }
@@ -33,6 +40,9 @@ const $RepositoryListState = _$RepositoryListStateTearOff();
 mixin _$RepositoryListState {
   List<Repository> get repositories => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  String get searchQuery => throw _privateConstructorUsedError;
+  int get page => throw _privateConstructorUsedError;
+  bool get isCompleteLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RepositoryListStateCopyWith<RepositoryListState> get copyWith =>
@@ -44,7 +54,12 @@ abstract class $RepositoryListStateCopyWith<$Res> {
   factory $RepositoryListStateCopyWith(
           RepositoryListState value, $Res Function(RepositoryListState) then) =
       _$RepositoryListStateCopyWithImpl<$Res>;
-  $Res call({List<Repository> repositories, bool isLoading});
+  $Res call(
+      {List<Repository> repositories,
+      bool isLoading,
+      String searchQuery,
+      int page,
+      bool isCompleteLoading});
 }
 
 /// @nodoc
@@ -60,6 +75,9 @@ class _$RepositoryListStateCopyWithImpl<$Res>
   $Res call({
     Object? repositories = freezed,
     Object? isLoading = freezed,
+    Object? searchQuery = freezed,
+    Object? page = freezed,
+    Object? isCompleteLoading = freezed,
   }) {
     return _then(_value.copyWith(
       repositories: repositories == freezed
@@ -69,6 +87,18 @@ class _$RepositoryListStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchQuery: searchQuery == freezed
+          ? _value.searchQuery
+          : searchQuery // ignore: cast_nullable_to_non_nullable
+              as String,
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      isCompleteLoading: isCompleteLoading == freezed
+          ? _value.isCompleteLoading
+          : isCompleteLoading // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -81,7 +111,12 @@ abstract class _$RepositoryListStateCopyWith<$Res>
           $Res Function(_RepositoryListState) then) =
       __$RepositoryListStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Repository> repositories, bool isLoading});
+  $Res call(
+      {List<Repository> repositories,
+      bool isLoading,
+      String searchQuery,
+      int page,
+      bool isCompleteLoading});
 }
 
 /// @nodoc
@@ -99,6 +134,9 @@ class __$RepositoryListStateCopyWithImpl<$Res>
   $Res call({
     Object? repositories = freezed,
     Object? isLoading = freezed,
+    Object? searchQuery = freezed,
+    Object? page = freezed,
+    Object? isCompleteLoading = freezed,
   }) {
     return _then(_RepositoryListState(
       repositories: repositories == freezed
@@ -109,6 +147,18 @@ class __$RepositoryListStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchQuery: searchQuery == freezed
+          ? _value.searchQuery
+          : searchQuery // ignore: cast_nullable_to_non_nullable
+              as String,
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      isCompleteLoading: isCompleteLoading == freezed
+          ? _value.isCompleteLoading
+          : isCompleteLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -117,7 +167,11 @@ class __$RepositoryListStateCopyWithImpl<$Res>
 
 class _$_RepositoryListState implements _RepositoryListState {
   const _$_RepositoryListState(
-      {this.repositories = const [], this.isLoading = false});
+      {this.repositories = const [],
+      this.isLoading = false,
+      this.searchQuery = '',
+      this.page = 1,
+      this.isCompleteLoading = false});
 
   @JsonKey(defaultValue: const [])
   @override
@@ -125,10 +179,19 @@ class _$_RepositoryListState implements _RepositoryListState {
   @JsonKey(defaultValue: false)
   @override
   final bool isLoading;
+  @JsonKey(defaultValue: '')
+  @override
+  final String searchQuery;
+  @JsonKey(defaultValue: 1)
+  @override
+  final int page;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isCompleteLoading;
 
   @override
   String toString() {
-    return 'RepositoryListState(repositories: $repositories, isLoading: $isLoading)';
+    return 'RepositoryListState(repositories: $repositories, isLoading: $isLoading, searchQuery: $searchQuery, page: $page, isCompleteLoading: $isCompleteLoading)';
   }
 
   @override
@@ -138,14 +201,22 @@ class _$_RepositoryListState implements _RepositoryListState {
             other is _RepositoryListState &&
             const DeepCollectionEquality()
                 .equals(other.repositories, repositories) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.searchQuery, searchQuery) &&
+            const DeepCollectionEquality().equals(other.page, page) &&
+            const DeepCollectionEquality()
+                .equals(other.isCompleteLoading, isCompleteLoading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(repositories),
-      const DeepCollectionEquality().hash(isLoading));
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(searchQuery),
+      const DeepCollectionEquality().hash(page),
+      const DeepCollectionEquality().hash(isCompleteLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -156,12 +227,22 @@ class _$_RepositoryListState implements _RepositoryListState {
 
 abstract class _RepositoryListState implements RepositoryListState {
   const factory _RepositoryListState(
-      {List<Repository> repositories, bool isLoading}) = _$_RepositoryListState;
+      {List<Repository> repositories,
+      bool isLoading,
+      String searchQuery,
+      int page,
+      bool isCompleteLoading}) = _$_RepositoryListState;
 
   @override
   List<Repository> get repositories;
   @override
   bool get isLoading;
+  @override
+  String get searchQuery;
+  @override
+  int get page;
+  @override
+  bool get isCompleteLoading;
   @override
   @JsonKey(ignore: true)
   _$RepositoryListStateCopyWith<_RepositoryListState> get copyWith =>

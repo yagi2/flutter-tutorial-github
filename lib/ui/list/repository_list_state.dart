@@ -8,5 +8,8 @@ class RepositoryListState with _$RepositoryListState {
   const factory RepositoryListState({
     @Default([]) List<Repository> repositories,
     @Default(false) bool isLoading,
+    @Default('') String searchQuery,
+    @Default(1) int page,
+    @Default(false) bool isCompleteLoading,
   }) = _RepositoryListState;
 }

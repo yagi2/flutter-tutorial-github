@@ -34,7 +34,7 @@ class _RepositorySearchInputWidget extends ConsumerWidget {
         onSubmitted: (input) {
           ref
               .read(repositoryListViewModelProvider.notifier)
-              .searchRepositories(input);
+              .initialLoadRepositories(input);
         },
       ),
     );
@@ -54,12 +54,22 @@ class _RepositoryListWithProgressWidget extends ConsumerWidget {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
+            if (index == viewModel.repositories.length - 1) {
+              WidgetsBinding.instance?.addPostFrameCallback((_) {
+                ref
+                    .read(repositoryListViewModelProvider.notifier)
+                    .pagingLoadRepositories();
+              });
+              return viewModel.isCompleteLoading
+                  ? Container()
+                  : const Center(child: CircularProgressIndicator());
+            }
             return _RepositoryCardWidget(
                 repository: viewModel.repositories[index]);
           },
           itemCount: viewModel.repositories.length,
         ),
-        viewModel.isLoading
+        viewModel.isLoading && viewModel.repositories.isEmpty
             ? const Center(child: CircularProgressIndicator())
             : Container()
       ],
